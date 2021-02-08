@@ -49,4 +49,7 @@
 #define DRIVER_LED_TOTAL 53
 #ifdef RGB_DI_PIN
     #define RGB_MATRIX_KEYPRESSES // reacts to keypresses
+    #define RGB_MATRIX_KEYRELEASES
+    #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+    #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_TYPING_HEATMAP
 #endif

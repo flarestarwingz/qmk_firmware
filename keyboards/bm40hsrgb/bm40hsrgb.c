@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "bm40hsrgb.h"
+#define RGB_MATRIX_MULTIPLE_EFFECTS { LED_FLAG_KEYLIGHT, LED_FLAG_MODIFIER, LED_FLAG_UNDERGLOW }
 
 #if defined(RGB_MATRIX_ENABLE)
 led_config_t g_led_config = {
@@ -22,7 +23,7 @@ led_config_t g_led_config = {
         { 0,  1,  2,  3,  4,  5,      6,  7,  8,  9, 10, 11},
         {12, 13, 14, 15, 16, 17,     18, 19, 20, 21, 22, 23},
         {24, 25, 26, 27, 28, 29,     30, 31, 32, 33, 34, 35},
-        {36, 37, 38, 39, 40, 41, NO_LED, 42, 43, 44, 45, 46}
+        {36, 37, 38, 39, 40, 41, NO_LED, 42, 43, 44, 45, 46},
     }, {
         // LED Index to Physical Position
         {  0,  0}, { 20,  0}, { 40,  0}, {61,  0}, {81,  0}, {101,  0}, {122,  0}, {142,  0}, {162,  0}, {183,  0}, {203,  0}, {224,  0},
@@ -40,3 +41,65 @@ led_config_t g_led_config = {
     }
 };
 #endif
+// Runs constantly in the background, in a loop.
+void matrix_scan_user(void) {
+
+    uint8_t layer = biton32(layer_state);
+
+    // INSERT CODE HERE: turn off all leds
+
+    switch (layer) {
+        case 0:
+            setBacklightWhite();
+            rgb_matrix_set_color(40, 2, 2, 2);
+            rgb_matrix_set_color(42, 2, 2, 2);
+            break;
+        case 1:
+            setBacklightRed();
+            rgb_matrix_set_color(40, 255, 0, 0);
+            break;
+        case 2:
+            setBacklightGreen();
+            rgb_matrix_set_color(42, 0, 255, 0);
+            break;
+        case 3:
+            setBacklightBlue();
+            rgb_matrix_set_color(40, 0, 0, 255);
+            rgb_matrix_set_color(42, 0, 0, 255);
+            break;
+        default:
+            setBacklightWhite();
+            break;
+    }
+};
+
+void setBacklight(uint8_t red, uint8_t green, uint8_t blue)
+{
+  rgb_matrix_set_color(47, red, green, blue);
+  rgb_matrix_set_color(48, red, green, blue);
+  rgb_matrix_set_color(49, red, green, blue);
+  rgb_matrix_set_color(50, red, green, blue);
+  rgb_matrix_set_color(51, red, green, blue);
+  rgb_matrix_set_color(52, red, green, blue);
+}
+
+void setBacklightRed(void)
+{
+  setBacklight(255,0,0);
+}
+void setBacklightBlue(void)
+{
+  setBacklight(0,0,255);
+}
+void setBacklightGreen(void)
+{
+  setBacklight(0,255,0);
+}
+void setBacklightWhite(void)
+{
+  setBacklight(255,255,255);
+}
+void setBacklightOff(void)
+{
+  setBacklight(0,0,0);
+}

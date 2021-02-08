@@ -27,4 +27,9 @@
 	{ K200,  K201,  K202,  K203,  K204,  K205,  K206,  K207,  K208,  K209,  K210,  K211 }, \
 	{ K300,  K301,  K302,  K303,  K304,  K305,  KC_NO, K307,  K308,  K309,  K310,  K311 }  \
 }
-
+void setBacklight(uint8_t red, uint8_t green, uint8_t blue);
+void setBacklightRed(void);
+void setBacklightBlue(void);
+void setBacklightGreen(void);
+void setBacklightWhite(void);
+void setBacklightOff(void);
