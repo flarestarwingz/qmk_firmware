@@ -24,6 +24,9 @@
 #define MANUFACTURER    KPRepublic
 #define PRODUCT         BM40 Hotswap RGB
 
+//#define LIGHTING        qmk_backlight_rgblight;
+#define DYNAMIC_KEYMAP_LAYER_COUNT 6
+
 /* key matrix size */
 #define MATRIX_ROWS 4
 #define MATRIX_COLS 12
@@ -47,9 +50,12 @@
 
 #define RGB_DI_PIN E2
 #define DRIVER_LED_TOTAL 53
-#ifdef RGB_DI_PIN
+ #ifdef RGB_DI_PIN
     #define RGB_MATRIX_KEYPRESSES // reacts to keypresses
     #define RGB_MATRIX_KEYRELEASES
     #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-    #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_TYPING_HEATMAP
-#endif
+     // #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_NONE
+     #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_TYPING_HEATMAP
+ #endif
+
+#define TAPPING_TERM 175
